@@ -63,3 +63,38 @@ class Ball:
 
     def draw(self, screen):
         pygame.draw.circle(screen, COLORS['white'], (int(self.x), int(self.y)), self.radius)
+# Game
+class Game:
+    def __init__(self):
+        self.paddle = Paddle()
+        self.ball = Ball()
+        self.running = True
+
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+
+    def update(self):
+        self.paddle.move()
+        self.ball.move()
+        self.ball.collide_with_paddle(self.paddle)
+
+    def render(self):
+        screen.fill(BG_COLOR)
+        self.paddle.draw(screen)
+        self.ball.draw(screen)
+        pygame.display.flip()
+
+    def run(self):
+        clock = pygame.time.Clock()
+        while self.running:
+            self.handle_events()
+            self.update()
+            self.render()
+            clock.tick(60)
+
+if __name__ == "__main__":
+    game = Game()
+    game.run()
+    pygame.quit()
