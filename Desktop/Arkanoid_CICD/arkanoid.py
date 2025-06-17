@@ -38,3 +38,28 @@ class Paddle:
 
     def draw(self, screen):
         pygame.draw.rect(screen, COLORS['white'], (self.x, self.y, self.width, self.height))
+
+# Ball
+class Ball:
+    def __init__(self):
+        self.radius = 10
+        self.x = WIDTH // 2
+        self.y = HEIGHT // 2
+        self.dx = DIFFICULTY[args.difficulty]['ball_speed']
+        self.dy = -DIFFICULTY[args.difficulty]['ball_speed']
+
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy
+        if self.x <= self.radius or self.x >= WIDTH - self.radius:
+            self.dx = -self.dx
+        if self.y <= self.radius:
+            self.dy = -self.dy
+
+    def collide_with_paddle(self, paddle):
+        if (self.y + self.radius >= paddle.y and
+            paddle.x <= self.x <= paddle.x + paddle.width):
+            self.dy = -self.dy
+
+    def draw(self, screen):
+        pygame.draw.circle(screen, COLORS['white'], (int(self.x), int(self.y)), self.radius)
