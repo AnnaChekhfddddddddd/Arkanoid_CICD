@@ -184,3 +184,4 @@ if __name__ == "__main__":
     game = Game(config)
     game.run()
     pygame.quit()
+# Trigger ArkanoidCI test
