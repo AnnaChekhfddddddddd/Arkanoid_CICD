@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+  actions: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -57,4 +61,3 @@ jobs:
         name: arkanoid-coverage-report
         path: htmlcov/
         if-no-files-found: error
-        #Тригер оновлення для Actions
