@@ -93,6 +93,21 @@ class Game:
             self.update()
             self.render()
             clock.tick(60)
+# Brick
+class Brick:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.width = 80
+        self.height = 30
+        self.is_destroyed = False
+
+    def draw(self, screen):
+        if not self.is_destroyed:
+            pygame.draw.rect(screen, COLORS['blue'], (self.x, self.y, self.width, self.height))
+
+    def destroy(self):
+        self.is_destroyed = True
 
 if __name__ == "__main__":
     game = Game()
