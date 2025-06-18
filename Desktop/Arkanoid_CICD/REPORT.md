@@ -29,4 +29,4 @@
 ## Інструкції
 - **Запустити:**  
   - `python arkanoid.py --difficulty medium`  
-  - `python arkanoid.py --bg-color pink` (або інший колір: red, blue)  
+  - `python arkanoid.py --bg-color pink` (або інший колір: red, blue)  #колір
