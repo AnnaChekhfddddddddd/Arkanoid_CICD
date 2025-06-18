@@ -1,0 +1,33 @@
+__pycache__/
+*.pyc
+report.html
+flake8.txt
+htmlcov/
+.pytest_cache/
+*.mdf
+*.ldf
+*.lnk
+*.url
+*.tmp
+*.log
+*.gif
+*.png
+*.drawio
+*.docx
+*.pdf
+*.ipynb
+.vs/
+desktop.ini
+AppData/
+Documents/
+Downloads/
+Pictures/
+Videos/
+Music/
+Favorites/
+Contacts/
+Searches/
+Saved Games/
+Links/
+1 курс*/
+2 курс*/

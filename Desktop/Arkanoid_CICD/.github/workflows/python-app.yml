@@ -57,3 +57,4 @@ jobs:
         name: arkanoid-coverage-report
         path: htmlcov/
         if-no-files-found: error
+        #Тригер оновлення для Actions
