@@ -28,18 +28,24 @@ jobs:
         SDL_VIDEODRIVER: dummy
       run: |
         pytest tests/test_arkanoid.py --cov=arkanoid --cov-report=html --html=report.html --self-contained-html
+    - name: List generated files
+      run: |
+        ls -R .
     - name: Upload test report
       uses: actions/upload-artifact@v4
       with:
         name: pytest-report
         path: report.html
+        if-no-files-found: error
     - name: Upload Flake8 report
       uses: actions/upload-artifact@v4
       with:
         name: flake8-report
         path: flake8.txt
+        if-no-files-found: error
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
       with:
         name: coverage-report
         path: htmlcov/
+        if-no-files-found: error
