@@ -113,3 +113,60 @@ if __name__ == "__main__":
     game = Game()
     game.run()
     pygame.quit()
+    # Config
+class Config:
+    def __init__(self):
+        self.difficulty = args.difficulty
+        self.bg_color = args.bg_color
+
+    def parse_args(self):
+        return self.difficulty, self.bg_color
+
+# Онови Game __init__ і update
+class Game:
+    def __init__(self):
+        self.paddle = Paddle()
+        self.ball = Ball()
+        self.bricks = [Brick(x, y) for y in range(50, 200, 40) for x in range(50, WIDTH-50, 90)]
+        self.score = 0
+        self.lives = 3
+        self.running = True
+
+    def update(self):
+        self.paddle.move()
+        self.ball.move()
+        self.ball.collide_with_paddle(self.paddle)
+        for brick in self.bricks:
+            if not brick.is_destroyed:
+                if (self.ball.y - self.ball.radius <= brick.y + brick.height and
+                    self.ball.y + self.ball.radius >= brick.y and
+                    brick.x <= self.ball.x <= brick.x + brick.width):
+                    brick.destroy()
+                    self.ball.dy = -self.ball.dy
+                    self.score += 10
+        if self.ball.y > HEIGHT:
+            self.lives -= 1
+            self.ball = Ball()
+            if self.lives == 0:
+                self.running = False
+        if all(brick.is_destroyed for brick in self.bricks):
+            self.running = False
+
+    def render(self):
+        screen.fill(BG_COLOR)
+        self.paddle.draw(screen)
+        self.ball.draw(screen)
+        for brick in self.bricks:
+            brick.draw(screen)
+        font = pygame.font.SysFont(None, 36)
+        score_text = font.render(f"Score: {self.score}", True, COLORS['white'])
+        lives_text = font.render(f"Lives: {self.lives}", True, COLORS['white'])
+        screen.blit(score_text, (10, 10))
+        screen.blit(lives_text, (WIDTH - 100, 10))
+        pygame.display.flip()
+
+if __name__ == "__main__":
+    config = Config()
+    game = Game()
+    game.run()
+    pygame.quit()
